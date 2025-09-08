@@ -10,7 +10,7 @@ def get_files_info(working_directory, directory="."):
         else:
             dir_name = f"\'{os.path.basename(full_path)}\'"
 
-        if full_path.startswith(os.path.abspath(working_directory)) == False:
+        if not full_path.startswith(os.path.abspath(working_directory)):
             return f'Error: Cannot list "{directory}" as it is outside the permitted working directory'
 
         if not os.path.isdir(full_path):
