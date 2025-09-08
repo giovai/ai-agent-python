@@ -2,6 +2,7 @@ import unittest
 from functions.get_files_info import get_files_info
 from functions.get_file_content import get_file_content
 from functions.write_file import write_file
+from functions.run_python_file import run_python_file
 
 class TestGetFilesInfo(unittest.TestCase):
     def test_current_dir(self):
@@ -22,12 +23,12 @@ class TestGetFilesInfo(unittest.TestCase):
     def test_outside_work_dir(self):
         result = get_files_info("calculator", "/bin")
         print(result)
-        self.assertEqual('Error: failed to get files info: Error: Cannot read "/bin" as it is outside the permitted working directory', result)
+        self.assertEqual('Error: failed to get files info: Error: Cannot access "/bin" as it is outside the permitted working directory', result)
     
     def test_outside_work_dir_relative(self):
         result = get_files_info("calculator", "../")
         print(result)
-        self.assertEqual('Error: failed to get files info: Error: Cannot read "../" as it is outside the permitted working directory', result)
+        self.assertEqual('Error: failed to get files info: Error: Cannot access "../" as it is outside the permitted working directory', result)
 
 class TestGetFileContent(unittest.TestCase):
     def test_shorter_than_limit(self):
@@ -55,6 +56,26 @@ class TestWriteFileContent(unittest.TestCase):
         print(result)
     def test_outside_permitted_dir(self):
         result = write_file("calculator", "/tmp/temp.txt", "this should not be allowed")
+        print(result)
+
+class TestRunPythonFile(unittest.TestCase):
+    def test_missing_args(self):
+        result = run_python_file("calculator", "main.py")
+        print(result)
+    def test_with_args(self):
+        result = run_python_file("calculator", "main.py", ["3 + 5"])
+        print(result)
+    def test_execute_tests(self):
+        result = run_python_file("calculator", "tests.py")
+        print(result)
+    def test_outside_permitted_dir(self):
+        result = run_python_file("calculator", "../main.py")
+        print(result)
+    def test_non_existent(self):
+        result = run_python_file("calculator", "nonexistent.py")
+        print(result)
+    def test_not_python(self):
+        result = run_python_file("calculator", "nonexistent.bla")
         print(result)
 
 if __name__ == "__main__":
