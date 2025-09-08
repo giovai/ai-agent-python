@@ -1,23 +1,14 @@
 import os
+from functions.common import get_safe_full_path
 
 def get_files_info(working_directory, directory="."):
     try:
-        joined_path = os.path.join(working_directory, directory)
-        full_path = os.path.abspath(joined_path)
-
-        if directory == ".":
-            dir_name = "current"
-        else:
-            dir_name = f"\'{os.path.basename(full_path)}\'"
-
-        if not full_path.startswith(os.path.abspath(working_directory)):
-            return f'Error: Cannot list "{directory}" as it is outside the permitted working directory'
+        full_path = get_safe_full_path(working_directory, directory)
 
         if not os.path.isdir(full_path):
             return f'Error: "{directory}" is not a directory'
 
         dir_entries = os.listdir(full_path)
-        header = f'Result for {dir_name} directory:\n'
 
         def get_dir_entry_info(entry):
             entry_path = f'{full_path}/{entry}'
@@ -29,7 +20,7 @@ def get_files_info(working_directory, directory="."):
             return result
 
         files_info = map(get_dir_entry_info, dir_entries)
-        return header + "\n".join(files_info)
+        return "\n".join(files_info)
 
     except Exception as e:
         return f'Error: failed to get files info: {e}'
