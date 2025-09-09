@@ -1,7 +1,7 @@
 import os
 from google.genai import types
 
-from functions.common import get_safe_full_path
+from utils.get_safe_file_path import get_safe_full_path
 
 def get_files_info(working_directory, directory="."):
     try:

@@ -21,7 +21,7 @@ def call_function(function_call_part, verbose=False):
         print(f"Calling function: {function_name}")
 
     fn = available_functions[function_name]
-    if fn == None:
+    if fn is None:
         return types.Content(
             role="tool",
             parts=[

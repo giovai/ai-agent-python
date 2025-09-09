@@ -1,2 +1,3 @@
 MAX_CHARS = 10000
+MAX_GEN_ITERARIONS = 20
 WORKING_DIR = "./calculator"
