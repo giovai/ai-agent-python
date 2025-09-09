@@ -1,3 +1,4 @@
+GEN_AI_MODEL_VERSION = "gemini-2.5-flash"
 MAX_CHARS = 10000
 MAX_GEN_ITERARIONS = 20
 WORKING_DIR = "./calculator"
