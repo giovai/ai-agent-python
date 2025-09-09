@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 from google import genai
 from google.genai import types
 
-from config import MAX_GEN_ITERARIONS
+from config import GEN_AI_MODEL_VERSION, MAX_GEN_ITERARIONS
 from functions.call_function import call_function
 from functions.get_file_content import schema_get_file_content
 from functions.get_files_info import schema_get_files_info
@@ -56,7 +56,7 @@ All paths you provide should be relative to the working directory. You do not ne
         counter = 0
         while counter < MAX_GEN_ITERARIONS:
             response = client.models.generate_content(
-                model="gemini-2.0-flash-001",
+                model=GEN_AI_MODEL_VERSION,
                 contents=messages,
                 config=types.GenerateContentConfig(
                     tools=[available_functions], system_instruction=system_prompt
