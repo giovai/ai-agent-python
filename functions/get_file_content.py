@@ -2,7 +2,7 @@ import os
 from google.genai import types
 
 from config import MAX_CHARS
-from functions.common import get_safe_full_path
+from utils.get_safe_file_path import get_safe_full_path
 
 def get_file_content(working_directory, file_path):
     try:
@@ -17,7 +17,7 @@ def get_file_content(working_directory, file_path):
             if not "" == f.readline():
                 file_content_string += f'[...File "{file_path}" truncated at 10000 characters]'
 
-            return file_content_string
+        return file_content_string
 
     except Exception as e:
         return f'Error: failed to get file contents: {e}'

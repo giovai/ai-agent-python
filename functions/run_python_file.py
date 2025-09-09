@@ -1,8 +1,9 @@
 import os
 import subprocess
+
 from google.genai import types
 
-from functions.common import get_safe_full_path
+from utils.get_safe_file_path import get_safe_full_path
 
 def run_python_file(working_directory, file_path, args=[]):
     if not file_path.endswith(".py"):
